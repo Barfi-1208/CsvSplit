@@ -12,10 +12,14 @@ def init():
         name = i[:i.index('_')]
         if name not in ans:
             ans[name] = [('../work/' + i)]
-        ans[name].append('../work/' + i)
+        else:
+            ans[name].append('../work/' + i)
 
     ans.pop('.DS')
     return ans
 
 if __name__ == '__main__':
-    init()
+    temp = init()
+    for i in temp:
+        for j in temp[i]:
+            print j

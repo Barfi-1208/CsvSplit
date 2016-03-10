@@ -15,14 +15,16 @@ def work(x, y):
         with open(addr, 'rb') as fi:
             content = csv.reader(fi)
             for row in content:
-                if content.line_num == 1:
+                if len(row) < 5:
+                    continue
+                elif content.line_num == 1:
                     if temp[0] != '':
                         continue
                     else:
                         temp = row[:3] + row[4:]
                 # 排除第一行 ,顺带将fields添加进temp
 
-                elif row[3] == '':
+                elif '2015' in row[0] and row[3] == '':
                     with open('../done/' + x + '/' + row[2] + '.csv', 'ab') as fo:
                         writer = csv.writer(fo)
                         if row[2] not in city:
@@ -41,4 +43,3 @@ if __name__ == '__main__':
     y = []
     y.append('./eg/' + t)
     work(x ,y)
-
